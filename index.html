@@ -1,1 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>marche-takanedai</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, sans-serif; margin: 40px; line-height: 1.6; }
+    .card { padding: 20px; border: 1px solid #ccc; border-radius: 12px; }
+    nav a { display:block; margin: .5rem 0; font-weight: 600; }
+    .ok { padding:.25rem .5rem; background:#eef; border-radius:6px; }
+  </style>
+</head>
+<body>
+  <h1>Marche Takanedai</h1>
+  <p class="ok"> 表示テスト：このテキストが見えればトップはOKです。</p>
 
+  <nav>
+    <a href="./sample/"> sample ページへ</a>
+    <a href="./shoplist/"> shoplist ページへ</a>
+    <a href="./images/"> images フォルダ一覧（一覧が出ればパスOK）</a>
+  </nav>
+
+  <div class="card">
+    <p>共通画像テスト（ある場合）：</p>
+    <img src="./images/logo.png" alt="ロゴ" onerror="this.insertAdjacentHTML('afterend','<small> images/logo.png が無いかパス違い</small>')">
+  </div>
+</body>
+</html>
