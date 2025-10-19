@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ベーカリー ミモザ | ココまちマルシェ</title>
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="../../styles/main.css">
+  <style>
+    :root{ --content-w:480px }
+    /* Mobile-first: SP優先サイズ */
+    .shop-detail{ margin:12px auto 72px; padding:12px; border-radius:12px; background:#f9f6f0; min-height:auto }
+    .shop-hero{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px }
+    .shop-hero img{ width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; border-radius:10px }
+    .shop-head{ display:block; gap:8px; margin:6px 0 10px }
+    .shop-name + .shop-catch{ display:block; margin-top:4px }
+    .shop-name{ font-size:clamp(20px,6vw,28px); margin:0 }
+    .shop-catch{ font-size:14px; line-height:1.6; margin:0 }
+    .info{ display:grid; grid-template-columns:max-content 1fr; column-gap:12px; row-gap:8px; margin:12px 0 }
+    .info dt{ color:#64748b; font-weight:600 }
+    .info dd{ margin:0 }
+    .btn{ min-height:44px; padding:10px 12px; border-radius:10px }
+    .back{ margin-top:16px }
+    .back .btn{ background:#e8f1ff; border:1px solid #cfe0ff; color:#0f172a }
+    .back .btn:focus-visible{ outline:2px solid #bcd4ff; outline-offset:2px }
+  </style>
+</head>
+<body>
+  <main class="shop-detail" aria-labelledby="name">
+    <div class="shop-hero">
+      <img src="../../images/shops/bakery-mimosa/hero.jpg" alt="ベーカリー ミモザ 外観" loading="lazy" onerror="this.src='https://placehold.co/800x500?text=Bakery+Mimosa'">
+      <img src="../../images/shops/bakery-mimosa/sub.jpg" alt="ベーカリー ミモザ 商品" loading="lazy" onerror="this.src='https://placehold.co/800x500?text=Bakery+Mimosa+Sub'">
+    </div>
+    <div class="shop-head">
+      <h1 class="shop-name" id="name">ベーカリー ミモザ</h1>
+      <p class="shop-catch">毎日焼きたて。ハード系も人気の街パン。</p>
+    </div>
+    <dl class="info">
+      <dt>住所</dt><dd>（準備中）</dd>
+      <dt>営業時間</dt><dd>（準備中）</dd>
+      <dt>電話</dt><dd><a href="tel:">（準備中）</a></dd>
+      <dt>HP</dt><dd><a href="#" rel="noopener">（準備中）</a></dd>
+      <dt>SNS</dt><dd><a href="#" rel="noopener">（準備中）</a></dd>
+    </dl>
+    <ul class="pill" aria-label="関連タグ">
+      <li>ベーカリー</li><li>テイクアウト</li><li>ハード系</li>
+    </ul>
+    <p class="back"><a class="btn" href="../../index.html#shoplist">← ショップ一覧へ戻る</a></p>
+  </main>
+</body>
+</html>

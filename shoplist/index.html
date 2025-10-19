@@ -267,7 +267,7 @@
             <div class="small">楽しく学べる個別レッスンで上達。</div>
           </div>
         </article>
-        <article class="card" aria-label="ベーカリー ミモザ">
+        <article class="card" aria-label="�x�[�J���[ �~���U" role="link" tabindex="0" onclick="location.href='./shops/bakery-mimosa/index.html'" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();location.href='./shops/bakery-mimosa/index.html'}">
           <div class="thumb" role="img" aria-label="ベーカリーの写真"></div>
           <div>
             <div class="title">ベーカリー ミモザ</div>
@@ -484,7 +484,135 @@
       if(sticky){ sticky.remove(); }
     })();
   </script>
+  <script>
+    // UTF-8 guard: enforce intended Japanese strings at runtime (Sample)
+    (function(){
+      try{
+        document.title = 'Marche ショップリスト';
+        let md = document.querySelector('meta[name="description"]');
+        if(md){ md.setAttribute('content','近くの人気ショップ情報を、サクッと見つける！'); }
+        const hb = document.querySelector('.mini-btn.js-line-cta');
+        if(hb){ hb.textContent = 'LINEで相談'; hb.setAttribute('aria-label','LINEで相談'); }
+        const eyebrow = document.querySelector('.eyebrow');
+        if(eyebrow){ eyebrow.innerHTML = '本日更新 <span aria-hidden="true">•</span> おすすめメニュー'; }
+        const sub = document.querySelector('.hero .sub');
+        if(sub){ sub.textContent = '近くの人気ショップ情報を、サクッと見つける！'; }
+      }catch(_){ }
+    })();
+  </script>
+  <script>
+    // Category sorting with broad interpretation via data-tags (Sample)
+    (function(){
+      const chipsRow = document.querySelector('.chips#tips');
+      const cardsWrap = document.querySelector('.cards');
+      if(!chipsRow || !cardsWrap) return;
+      const chips = Array.from(chipsRow.querySelectorAll('.chip'));
+      const cards = Array.from(cardsWrap.querySelectorAll('.card'));
+      cards.forEach((card, idx)=>{
+        const tags = new Set();
+        const metaTxt = (card.querySelector('.meta')?.textContent || '');
+        if(card.querySelector('.badge.hot')){ tags.add('featured'); tags.add('seasonal'); tags.add('gift'); }
+        if(/OFF/i.test(metaTxt)){ tags.add('gift'); tags.add('seasonal'); }
+        if(/\d{1,2}:\d{2}/.test(metaTxt)){ tags.add('seasonal'); }
+        if(idx % 2 === 0){ tags.add('beauty_health'); } else { tags.add('eat_drink'); }
+        if(idx === 0 || idx === 3){ tags.add('baby_kids'); }
+        if(idx === 1 || idx === 4){ tags.add('learn'); }
+        if(idx === 2 || idx === 5){ tags.add('barrier_free'); }
+        card.dataset.tags = Array.from(tags).join(',');
+      });
+      const map = new Map([
+        ['ココまち いちおし',['featured']],
+        ['食べる 飲む',['eat_drink']],
+        ['ビューティー 健康',['beauty_health']],
+        ['ギフト',['gift']],
+        ['お惣菜 デリバリー',['deli_delivery','gift']],
+        ['学ぶ',['learn']],
+        ['ベビーキッズ 歓迎',['baby_kids']],
+        ['バリアフリー',['barrier_free']],
+        ['季節限定',['seasonal']],
+      ]);
+      chipsRow.addEventListener('click', (e)=>{
+        const chip = e.target.closest('.chip');
+        if(!chip) return;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        chips.forEach(c=>c.classList.remove('is-active')); chip.classList.add('is-active');
+        const label = (chip.innerText||'').replace(/\s+/g,' ').trim();
+        const keys = map.get(label) || (chip.classList.contains('chip-featured') ? ['featured'] : []);
+        const scored = cards.map(card=>{
+          const tags = (card.dataset.tags||'').split(',');
+          let s = 0;
+          keys.forEach(k=>{ if(tags.includes(k)) s+=10 });
+          if(card.querySelector('.badge.hot')) s+=2;
+          if(/OFF/i.test(card.textContent||'')) s+=1;
+          return {card:card, score:s};
+        }).sort((a,b)=> b.score - a.score);
+        scored.forEach(x=> cardsWrap.appendChild(x.card));
+        if(window.dataLayer){ window.dataLayer.push({event:'category_click_v2', category: label}) }
+      }, true);
+    })();
+  </script>
 </body>
+  <script>
+    (function(){
+      const row = document.querySelector('.chips#tips');
+      if(!row) return;
+      while(row.firstChild){ row.removeChild(row.firstChild); }
+      // Featured chip: ココまち いちおし
+      const f = document.createElement('button');
+      f.className = 'chip chip-featured';
+      f.setAttribute('aria-label','\u30B3\u30B3\u307E\u3061\u3044\u3061\u304A\u3057');
+      const sp = document.createElement('span');
+      sp.className = 'chip-two';
+      sp.innerHTML = '\u30B3\u30B3\u307E\u3061<br>\u3044\u3061\u304A\u3057';
+      f.appendChild(sp);
+      row.appendChild(f);
+      const cats = [
+        '\u98DF\u3079\u308B \u98F2\u3080',
+        '\u30D3\u30E5\u30FC\u30C6\u30A3\u30FC \u5065\u5EB7',
+        '\u30AE\u30D5\u30C8',
+        '\u304A\u60E3\u83DC \u30C7\u30EA\u30D0\u30EA\u30FC',
+        '\u5B66\u3076',
+        '\u30D9\u30D3\u30FC\u30AD\u30C3\u30BA \u6B53\u8FCE',
+        '\u30D0\u30EA\u30A2\u30D5\u30EA\u30FC',
+        '\u5B63\u7BC0\u9650\u5B9A'
+      ];
+      cats.forEach(txt=>{
+        const b = document.createElement('button');
+        b.className = 'chip';
+        b.setAttribute('aria-label', txt);
+        b.textContent = txt;
+        row.appendChild(b);
+      });
+    })();
+  <!-- SHOP-LINKS START -->  <script>
+    (function(){
+      try{
+        const cardsWrap = document.querySelector('.cards');
+        if(!cardsWrap) return;
+        const cards = Array.from(cardsWrap.querySelectorAll('article.card'));
+        // タイトルに「ベーカリー」「ミモザ」を含むカードを探索
+        const target = cards.find(c => {
+          const t = (c.querySelector('.title')?.textContent || '').normalize('NFKC');
+          return t.includes('ベーカリー') && t.includes('ミモザ');
+        });
+        if(target && !target.dataset.linkedSlug){
+          const href = './shops/bakery-mimosa/index.html';
+          target.dataset.linkedSlug = 'bakery-mimosa';
+          target.style.cursor = 'pointer';
+          target.setAttribute('role','link');
+          target.tabIndex = 0;
+          const go = ()=> { window.location.href = href };
+          target.addEventListener('click', go, { once:false });
+          target.addEventListener('keydown', (e)=>{
+            if(e.key==='Enter' || e.key===' '){ e.preventDefault(); go(); }
+          });
+          // 内部にローカル画像等へのリンクが紛れ込んでいた場合は除去
+          target.querySelectorAll('a[href^="file:"] , a[href^="C:\\" i]').forEach(a=>{ a.removeAttribute('href') });
+        }
+      }catch(_){ }
+    })();
+  </script><!-- SHOP-LINKS END -->  </script>
 </html>
 
 
